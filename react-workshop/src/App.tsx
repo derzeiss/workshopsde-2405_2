@@ -1,10 +1,24 @@
-import { Counter } from './components/Counter';
+import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { AppHeader } from './components/AppHeader';
+import { Theme } from './domain/theme/Theme';
+import { ThemeContext } from './domain/theme/ThemeContext';
 
 function App() {
+  const [primaryColor, setPrimaryColor] = useState('tomato');
+
+  const theme: Theme = {
+    primaryColor,
+    setPrimaryColor,
+  };
+
   return (
-    <div className="App">
-      <Counter />
-    </div>
+    <ThemeContext.Provider value={theme}>
+      <div className="App">
+        <AppHeader />
+        <Outlet />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
